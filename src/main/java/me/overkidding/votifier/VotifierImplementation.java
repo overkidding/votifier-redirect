@@ -49,13 +49,13 @@ public class VotifierImplementation {
 
         ByteBuffer bb = ByteBuffer.allocate(finalMessage.length()+4);
         bb.order(ByteOrder.BIG_ENDIAN);
-        bb.putShort(unit16(0x733a));
-        bb.putShort(unit16(finalMessage.length()));
+        bb.putShort(uint16(0x733a));
+        bb.putShort(uint16(finalMessage.length()));
         for(char c : finalMessage.toCharArray()) bb.put((byte)c);
         return bb.array();
     }
 
-    private short unit16(int in){
+    private short uint16(int in){
         return (short)(in & 0xFFFF);
     }
     
