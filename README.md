@@ -8,3 +8,6 @@ Vote redirection, prevents direct connections to the main server thru 8192 port.
   <li>Enable your firewall</li>
   <li>Add the rule to allow connections to the main server votifier port only from the secondary server</li>
 </ul>
+
+# Example
+![example](https://github.com/overkidding/votifier-redirect/assets/46853321/eaf49ea5-c4fb-4cde-bf1c-6168eaac4923)
