@@ -4,7 +4,13 @@
 name: Maven Package
 
 on:
-  workflow_dispatch: []
+  workflow_dispatch:
+    inputs:
+      name:
+        description: 'Person to greet'
+        default: 'World'
+        required: false
+        type: string
   release:
     types: [created]
 
