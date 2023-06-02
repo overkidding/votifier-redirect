@@ -1,10 +1,13 @@
-package me.overkidding.votifier;
+package me.overkidding.votifier.client;
 
-import at.yawk.votifier.Vote;
+import me.overkidding.votifier.server.objects.Vote;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.OutputStream;
 import java.net.InetSocketAddress;
 import java.net.Socket;
 
@@ -34,7 +37,6 @@ public class VotifierClient extends VotifierImplementation {
                 byte[] message = encode(vote, challengeToken, token);
                 os.write(message);
                 os.flush();
-                System.out.println(br.readLine());
                 System.out.println("Sent vote to " + address + ":" + port + " with token " + challengeToken);
             }
         } catch (Exception e) {

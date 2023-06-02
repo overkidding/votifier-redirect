@@ -1,34 +1,46 @@
-package me.overkidding;
+package me.overkidding.votifier;
 
-import at.yawk.votifier.VotifierKeyPair;
-import at.yawk.votifier.VotifierServerBuilder;
-import me.overkidding.votifier.VotifierClient;
+import me.overkidding.votifier.server.VotifierServerBuilder;
+import me.overkidding.votifier.server.objects.VotifierKeyPair;
+import lombok.Getter;
+import me.overkidding.votifier.client.VotifierClient;
 
 import java.io.File;
 
+@Getter
 public class Server {
 
-    public File KEY = new File("key.json");
-    public File CONFIG = new File("config.json");
-    public VotifierClient client;
+    private final File KEY = new File("key.json");
+    private final File CONFIG = new File("config.json");
+    private VotifierClient client;
+    private final Config config = new Config(CONFIG);
+    private final VotifierKeyPair keyPair;
+
+    public Config getConfig() {
+        return config;
+    }
+
+    public VotifierKeyPair getKeyPair() {
+        return keyPair;
+    }
 
     public Server(){
         try{
-            Config config = new Config(CONFIG);
             if (!KEY.exists()) {
-                VotifierKeyPair keyPair = VotifierKeyPair.generate();
+                keyPair = VotifierKeyPair.generate();
                 keyPair.write(KEY);
+            }else{
+                keyPair = VotifierKeyPair.read(KEY);
             }
 
             try {
-                client = new VotifierClient(config.getHost(), config.getPort(), config.getToken());
+                client = new VotifierClient(config.getHopHost(), config.getHopPort(), config.getHopToken());
             } catch (Exception e) {
                 e.printStackTrace();
                 return;
             }
 
             new VotifierServerBuilder().port(8192)
-                    .key(VotifierKeyPair.read(KEY))
                     .voteListener(vote -> {
                         System.out.println("Received vote from " + vote.getUsername() + " (" + vote.getAddress() + ") by " + vote.getService());
                         try {
@@ -39,6 +51,7 @@ public class Server {
                     }).start();
         }catch (Exception ex){
             System.out.println("Error while starting server: " + ex.getMessage());
+            throw new RuntimeException(ex);
         }
     }
 

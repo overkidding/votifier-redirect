@@ -1,6 +1,6 @@
-package me.overkidding.votifier;
+package me.overkidding.votifier.client;
 
-import at.yawk.votifier.Vote;
+import me.overkidding.votifier.server.objects.Vote;
 import com.google.gson.JsonObject;
 
 import javax.crypto.Mac;

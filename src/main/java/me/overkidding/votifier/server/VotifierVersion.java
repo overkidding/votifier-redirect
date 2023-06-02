@@ -4,25 +4,27 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0/.
  */
 
-package at.yawk.votifier;
+package me.overkidding.votifier.server;
 
 /**
  * @author yawkat
  */
 public class VotifierVersion {
-    private static final VotifierVersion LATEST = new VotifierVersion("1.9");
+
+    private static final VotifierVersion V2 = new VotifierVersion("2.0");
+    private static final VotifierVersion V1 = new VotifierVersion("1.9");
 
     private final String name;
 
     public static VotifierVersion getDefault() {
-        return LATEST;
+        return V1;
     }
 
     public VotifierVersion(String name) {
         this.name = name;
     }
 
-    String getName() {
+    public String getName() {
         return name;
     }
 }

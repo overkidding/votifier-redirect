@@ -7,6 +7,19 @@
   <build>
     <plugins>
       <plugin>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <version>3.8.1</version>
+        <configuration>
+          <annotationProcessorPaths>
+            <path>
+              <groupId>org.projectlombok</groupId>
+              <artifactId>lombok</artifactId>
+              <version>1.18.24</version>
+            </path>
+          </annotationProcessorPaths>
+        </configuration>
+      </plugin>
+      <plugin>
         <artifactId>maven-shade-plugin</artifactId>
         <version>3.4.1</version>
         <executions>
@@ -24,7 +37,7 @@
         <configuration>
           <archive>
             <manifest>
-              <mainClass>me.overkidding.Main</mainClass>
+              <mainClass>me.overkidding.votifier.Main</mainClass>
             </manifest>
           </archive>
         </configuration>
@@ -35,7 +48,7 @@
     <dependency>
       <groupId>org.projectlombok</groupId>
       <artifactId>lombok</artifactId>
-      <version>1.18.26</version>
+      <version>1.18.24</version>
       <scope>provided</scope>
     </dependency>
   </dependencies>

@@ -4,7 +4,10 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0/.
  */
 
-package at.yawk.votifier;
+package me.overkidding.votifier.server.objects;
+
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
 
 /**
  * @author yawkat
@@ -15,11 +18,38 @@ public class Vote {
     private final String address;
     private final String timestamp;
 
-    Vote(String username, String service, String address, String timestamp) {
+    public Vote(String username, String service, String address, String timestamp) {
         this.username = username;
         this.service = service;
         this.address = address;
         this.timestamp = timestamp;
+    }
+
+    public Vote(JsonObject jsonObject){
+        this(
+                jsonObject.get("username").getAsString(),
+                jsonObject.get("serviceName").getAsString(),
+                jsonObject.get("address").getAsString(),
+                getTimestamp(jsonObject.get("timestamp")));
+
+    }
+
+    @Override
+    public String toString() {
+        return "Vote{" +
+                "username='" + username + '\'' +
+                ", service='" + service + '\'' +
+                ", address='" + address + '\'' +
+                ", timestamp='" + timestamp + '\'' +
+                '}';
+    }
+
+    private static String getTimestamp(JsonElement object) {
+        try {
+            return Long.toString(object.getAsLong());
+        } catch (Exception e) {
+            return object.getAsString();
+        }
     }
 
     /**

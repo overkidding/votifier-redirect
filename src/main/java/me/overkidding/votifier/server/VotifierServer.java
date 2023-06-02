@@ -4,7 +4,7 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0/.
  */
 
-package at.yawk.votifier;
+package me.overkidding.votifier.server;
 
 /**
  * Votifier TCP server that operates on one listen address.

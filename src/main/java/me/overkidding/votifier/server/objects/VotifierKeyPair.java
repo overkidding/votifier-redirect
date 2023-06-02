@@ -4,7 +4,7 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0/.
  */
 
-package at.yawk.votifier;
+package me.overkidding.votifier.server.objects;
 
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
@@ -43,7 +43,7 @@ public class VotifierKeyPair {
         this.pair = pair;
     }
 
-    KeyPair getPair() {
+    public KeyPair getPair() {
         return pair;
     }
 
@@ -107,7 +107,7 @@ public class VotifierKeyPair {
     }
 
     public static VotifierKeyPair read(Reader reader) throws Exception {
-        return read(new JsonParser().parse(reader).getAsJsonObject());
+        return read(JsonParser.parseReader(reader).getAsJsonObject());
     }
 
     public static VotifierKeyPair read(Path path) throws Exception {
