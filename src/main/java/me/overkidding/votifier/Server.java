@@ -6,6 +6,7 @@ import lombok.Getter;
 import me.overkidding.votifier.client.VotifierClient;
 
 import java.io.File;
+import java.net.InetSocketAddress;
 
 @Getter
 public class Server {
@@ -40,7 +41,8 @@ public class Server {
                 return;
             }
 
-            new VotifierServerBuilder().port(8192)
+            new VotifierServerBuilder()
+                    .listenAddress(new InetSocketAddress(config.getCurrentHost(), config.getCurrentPort()))
                     .voteListener(vote -> {
                         System.out.println("Received vote from " + vote.getUsername() + " (" + vote.getAddress() + ") by " + vote.getService());
                         try {
